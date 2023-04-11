@@ -97,7 +97,8 @@ public class UserServiceImpl implements UserService {
   @Transactional
   public TokenResponse reissue(String refreshToken) {
     String loginId = jwtUtil.getLoginIdFromTokenIfValid(refreshToken);
-    // 로그인, 리이슈 할 때마다 유효한 refresh token이 생겨나므로, redis에 있는 token과 동일한지 비교함으로써 가장 최근에 발급된 refresh token이 맞는지 확인한다.
+    // 로그인, 리이슈 할 때마다 유효한 refresh token이 생겨나므로,
+    // redis에 있는 token과 동일한지 비교함으로써 가장 최근에 발급된 refresh token이 맞는지 확인한다.
     if (!isSameRefreshTokenInRedis(loginId, refreshToken)) {
       throw new IllegalArgumentException("token error");
     }

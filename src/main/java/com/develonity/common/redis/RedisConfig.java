@@ -13,12 +13,13 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 @Configuration
 @EnableRedisRepositories
 @RequiredArgsConstructor
-public class RedisRepositoryConfig {
+public class RedisConfig {
 
   private final RedisProperties redisProperties;
 
   @Bean
   public RedisConnectionFactory redisConnectionFactory() {
+    //jedis에 비해 Lettuce가 성능이 좋고, 문서화나 코드 정리가 잘 돼 있음. 피드백도 빠름
     return new LettuceConnectionFactory(redisProperties.getHost(), redisProperties.getPort());
   }
 

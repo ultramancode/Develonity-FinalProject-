@@ -14,10 +14,10 @@ public class RedisDao {
     this.redisTemplate = redisTemplate;
   }
 
-  public void setValues(String key, Object data) {
-    ValueOperations<String, Object> values = redisTemplate.opsForValue();
-    values.set(key, data);
-  }
+//  public void setValues(String key, Object data) {
+//    ValueOperations<String, Object> values = redisTemplate.opsForValue();
+//    values.set(key, data);
+//  }
 
   public void setValues(String key, Object data, Duration duration) {
     ValueOperations<String, Object> values = redisTemplate.opsForValue();
@@ -29,9 +29,9 @@ public class RedisDao {
     return values.get(key);
   }
 
-  public boolean existByKey(String key) {
-    return redisTemplate.hasKey(key);
-  }
+//  public boolean existByKey(String key) {
+//    return redisTemplate.hasKey(key);
+//  }
 
   public void deleteValues(String key) {
     redisTemplate.delete(key);
