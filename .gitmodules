@@ -1,4 +1,3 @@
 [submodule "config"]
 	path = config
 	url = https://github.com/ultramancode/DevelonityPrivateSubmodule.git
-
