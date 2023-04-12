@@ -118,7 +118,6 @@ public class CommunityBoardServiceImpl implements CommunityBoardService {
 
   //잡담 게시글 선택 조회
   @Override
-  @Cacheable(cacheNames = CacheNames.Board, key = "#boardId")
   public CommunityBoardResponse getCommunityBoard(Long boardId, User user) {
     CommunityBoard communityBoard = getCommunityBoardAndCheck(boardId);
     boolean hasLike = boardLikeService.existsLikesBoardIdAndUserId(boardId, user.getId());

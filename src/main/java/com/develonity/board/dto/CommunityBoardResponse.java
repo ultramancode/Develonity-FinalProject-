@@ -18,24 +18,24 @@ import lombok.RequiredArgsConstructor;
 @Builder
 @AllArgsConstructor
 //redis 캐싱 기능 위해 기본 생성자
-@NoArgsConstructor
+@RequiredArgsConstructor
 public class CommunityBoardResponse {
 
-  private Long id;
-  private String nickname;
-  private CommunityCategory communityCategory;
-  private String title;
-  private String content;
-  @JsonSerialize(using = LocalDateTimeSerializer.class)
-  @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-  private LocalDateTime createdAt;
-  @JsonSerialize(using = LocalDateTimeSerializer.class)
-  @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-  private LocalDateTime lastModifiedAt;
-  private long countAllComments;
+  private final Long id;
+  private final String nickname;
+  private final CommunityCategory communityCategory;
+  private final String title;
+  private final String content;
+//  @JsonSerialize(using = LocalDateTimeSerializer.class)
+//  @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+  private final LocalDateTime createdAt;
+//  @JsonSerialize(using = LocalDateTimeSerializer.class)
+//  @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+  private final LocalDateTime lastModifiedAt;
+  private final long countAllComments;
 
   //  private long countAllReplyComments;
-  private long boardLike;
+  private final long boardLike;
 
   private boolean hasLike;
 

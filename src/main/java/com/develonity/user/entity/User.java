@@ -2,6 +2,7 @@ package com.develonity.user.entity;
 
 import com.develonity.common.exception.CustomException;
 import com.develonity.common.exception.ExceptionStatus;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -13,7 +14,8 @@ import javax.validation.constraints.Max;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
+//레디스 캐싱 맵핑 오류 해결 위해
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Getter
 @NoArgsConstructor
 @Entity(name = "users")
