@@ -1,5 +1,6 @@
 package com.develonity.board.service;
 
+import com.develonity.board.dto.BoardPage;
 import com.develonity.board.dto.CommunityBoardRequest;
 import com.develonity.board.dto.CommunityBoardResponse;
 import com.develonity.board.dto.CommunityBoardSearchCond;
@@ -57,11 +58,11 @@ public interface CommunityBoardService {
   Page<CommunityBoardResponse> searchMyCommunityBoardByCond(CommunityBoardSearchCond cond,
       PageDto pageDto, Long userId);
 
-//
-//  //test
-//  Page<CommunityBoardResponse> getTestCommunityBoardPage(User user,
-//      BoardPage communityBoardPage);
 
-//  Page<CommunityBoardResponse> getCommunityBoardPage(User user,
-//      BoardPage communityBoardPage);
+  //test
+  Page<CommunityBoardResponse> getTestCommunityBoardPage(User user,
+      BoardPage communityBoardPage);
+
+  Page<CommunityBoardResponse> getCommunityBoardPage(User user,
+      BoardPage communityBoardPage);
 }

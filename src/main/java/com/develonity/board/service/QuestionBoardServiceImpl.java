@@ -1,5 +1,6 @@
 package com.develonity.board.service;
 
+import com.develonity.board.dto.BoardPage;
 import com.develonity.board.dto.PageDto;
 import com.develonity.board.dto.QuestionBoardRequest;
 import com.develonity.board.dto.QuestionBoardResponse;
@@ -230,38 +231,38 @@ public class QuestionBoardServiceImpl implements QuestionBoardService {
     return commentService.countComments(boardId);
   }
 
-//
-//
-//  //질문 게시글 전체 조회(querydsl 이전방식)
-//  @Override
-//  @Transactional(readOnly = true)
-//  public Page<QuestionBoardResponse> getQuestionBoardPage(User user,
-//      BoardPage questionBoardPage) {
-//
-//    Page<QuestionBoard> questionBoardPages = questionBoardRepository.findByQuestionCategoryAndTitleContainingOrContentContaining(
-//        questionBoardPage.getQuestionCategory(), questionBoardPage.getTitle(),
-//        questionBoardPage.getContent(),
-//        questionBoardPage.toPageable());
-//
-//    return questionBoardPages.map(
-//        questionBoard -> QuestionBoardResponse.toQuestionBoardResponse(questionBoard,
-//            getNicknameByQuestionBoard(questionBoard), countComments(questionBoard.getId())));
-//
-//  }
-//
-//  //테스트용전체조회
-//  @Override
-//  public Page<QuestionBoardResponse> getTestQuestionBoardPage(User user,
-//      BoardPage questionBoardPage) {
-//
-//    Page<QuestionBoard> questionBoardPages = questionBoardRepository.findByQuestionCategory(
-//        questionBoardPage.getQuestionCategory(),
-//        questionBoardPage.toPageable());
-//
-//    return questionBoardPages.map(
-//        questionBoard -> QuestionBoardResponse.toQuestionBoardResponse(questionBoard,
-//            getNicknameByQuestionBoard(questionBoard), countComments(questionBoard.getId())));
-//  }
+
+
+  //질문 게시글 전체 조회(querydsl 이전방식)
+  @Override
+  @Transactional(readOnly = true)
+  public Page<QuestionBoardResponse> getQuestionBoardPage(User user,
+      BoardPage questionBoardPage) {
+
+    Page<QuestionBoard> questionBoardPages = questionBoardRepository.findByQuestionCategoryAndTitleContainingOrContentContaining(
+        questionBoardPage.getQuestionCategory(), questionBoardPage.getTitle(),
+        questionBoardPage.getContent(),
+        questionBoardPage.toPageable());
+
+    return questionBoardPages.map(
+        questionBoard -> QuestionBoardResponse.toQuestionBoardResponse(questionBoard,
+            getNicknameByQuestionBoard(questionBoard), countComments(questionBoard.getId())));
+
+  }
+
+  //테스트용전체조회
+  @Override
+  public Page<QuestionBoardResponse> getTestQuestionBoardPage(User user,
+      BoardPage questionBoardPage) {
+
+    Page<QuestionBoard> questionBoardPages = questionBoardRepository.findByQuestionCategory(
+        questionBoardPage.getQuestionCategory(),
+        questionBoardPage.toPageable());
+
+    return questionBoardPages.map(
+        questionBoard -> QuestionBoardResponse.toQuestionBoardResponse(questionBoard,
+            getNicknameByQuestionBoard(questionBoard), countComments(questionBoard.getId())));
+  }
 }
 
 

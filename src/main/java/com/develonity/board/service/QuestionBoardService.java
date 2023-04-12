@@ -1,5 +1,6 @@
 package com.develonity.board.service;
 
+import com.develonity.board.dto.BoardPage;
 import com.develonity.board.dto.PageDto;
 import com.develonity.board.dto.QuestionBoardRequest;
 import com.develonity.board.dto.QuestionBoardResponse;
@@ -58,10 +59,10 @@ public interface QuestionBoardService {
 
   List<QuestionBoardResponse> questionBoardOrderBy(QuestionBoardSearchCond cond);
 
-//  Page<QuestionBoardResponse> getQuestionBoardPage(User user,
-//      BoardPage questionBoardPage);
-//
-//  //test
-//  Page<QuestionBoardResponse> getTestQuestionBoardPage(User user,
-//      BoardPage questionBoardPage);
+  Page<QuestionBoardResponse> getQuestionBoardPage(User user,
+      BoardPage questionBoardPage);
+
+  //test
+  Page<QuestionBoardResponse> getTestQuestionBoardPage(User user,
+      BoardPage questionBoardPage);
 }

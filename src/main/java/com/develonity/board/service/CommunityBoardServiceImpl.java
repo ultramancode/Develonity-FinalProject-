@@ -1,5 +1,6 @@
 package com.develonity.board.service;
 
+import com.develonity.board.dto.BoardPage;
 import com.develonity.board.dto.CommunityBoardRequest;
 import com.develonity.board.dto.CommunityBoardResponse;
 import com.develonity.board.dto.CommunityBoardSearchCond;
@@ -9,6 +10,7 @@ import com.develonity.board.entity.CommunityBoard;
 import com.develonity.board.entity.CommunityCategory;
 import com.develonity.board.repository.BoardImageRepository;
 import com.develonity.board.repository.CommunityBoardRepository;
+import com.develonity.cache.CacheNames;
 import com.develonity.comment.service.CommentService;
 import com.develonity.common.aws.service.AwsS3Service;
 import com.develonity.common.exception.CustomException;
@@ -19,6 +21,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -115,6 +118,7 @@ public class CommunityBoardServiceImpl implements CommunityBoardService {
 
   //잡담 게시글 선택 조회
   @Override
+  @Cacheable(cacheNames = CacheNames.Board, key = "#boardId")
   public CommunityBoardResponse getCommunityBoard(Long boardId, User user) {
     CommunityBoard communityBoard = getCommunityBoardAndCheck(boardId);
     boolean hasLike = boardLikeService.existsLikesBoardIdAndUserId(boardId, user.getId());
@@ -250,36 +254,36 @@ public class CommunityBoardServiceImpl implements CommunityBoardService {
     return commentService.countCommentsAndReplyComments(boardId);
   }
 
-//
-//  //잡담 게시글 전체 조회(querydsl 이전방식)
-//
-//  @Override
-//  @Transactional(readOnly = true)
-//  public Page<CommunityBoardResponse> getCommunityBoardPage(User user,
-//      BoardPage communityBoardPage) {
-//
-//    Page<CommunityBoard> communityBoardPages = communityBoardRepository.findByCommunityCategoryAndTitleContainingOrContentContaining(
-//        communityBoardPage.getCommunityCategory(),
-//        communityBoardPage.getTitle(),
-//        communityBoardPage.getContent(),
-//        communityBoardPage.toPageable());
-//
-//    return communityBoardPages.map(
-//        communityBoard -> CommunityBoardResponse.toCommunityBoardResponse(communityBoard,
-//            getNicknameByCommunityBoard(communityBoard), countAllComments(communityBoard.getId())));
-//  }
-//
-//  //테스트용전체조회(querydsl 이전방식)
-//  @Override
-//  public Page<CommunityBoardResponse> getTestCommunityBoardPage(User user,
-//      BoardPage communityBoardPage) {
-//
-//    Page<CommunityBoard> communityBoardPages = communityBoardRepository.findByCommunityCategory(
-//        communityBoardPage.getCommunityCategory(),
-//        communityBoardPage.toPageable());
-//
-//    return communityBoardPages.map(
-//        communityBoard -> CommunityBoardResponse.toCommunityBoardResponse(communityBoard,
-//            getNicknameByCommunityBoard(communityBoard), countAllComments(communityBoard.getId())));
-//  }
+
+  //잡담 게시글 전체 조회(querydsl 이전방식)
+
+  @Override
+  @Transactional(readOnly = true)
+  public Page<CommunityBoardResponse> getCommunityBoardPage(User user,
+      BoardPage communityBoardPage) {
+
+    Page<CommunityBoard> communityBoardPages = communityBoardRepository.findByCommunityCategoryAndTitleContainingOrContentContaining(
+        communityBoardPage.getCommunityCategory(),
+        communityBoardPage.getTitle(),
+        communityBoardPage.getContent(),
+        communityBoardPage.toPageable());
+
+    return communityBoardPages.map(
+        communityBoard -> CommunityBoardResponse.toCommunityBoardResponse(communityBoard,
+            getNicknameByCommunityBoard(communityBoard), countAllComments(communityBoard.getId())));
+  }
+
+  //테스트용전체조회(querydsl 이전방식)
+  @Override
+  public Page<CommunityBoardResponse> getTestCommunityBoardPage(User user,
+      BoardPage communityBoardPage) {
+
+    Page<CommunityBoard> communityBoardPages = communityBoardRepository.findByCommunityCategory(
+        communityBoardPage.getCommunityCategory(),
+        communityBoardPage.toPageable());
+
+    return communityBoardPages.map(
+        communityBoard -> CommunityBoardResponse.toCommunityBoardResponse(communityBoard,
+            getNicknameByCommunityBoard(communityBoard), countAllComments(communityBoard.getId())));
+  }
 }

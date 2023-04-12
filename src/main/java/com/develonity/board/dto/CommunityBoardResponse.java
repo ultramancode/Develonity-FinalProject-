@@ -2,28 +2,40 @@ package com.develonity.board.dto;
 
 import com.develonity.board.entity.CommunityBoard;
 import com.develonity.board.entity.CommunityCategory;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Getter
 @Builder
 @AllArgsConstructor
+//redis 캐싱 기능 위해 기본 생성자
+@NoArgsConstructor
 public class CommunityBoardResponse {
 
-  private final Long id;
-  private final String nickname;
-  private final CommunityCategory communityCategory;
-  private final String title;
-  private final String content;
-  private final LocalDateTime createdAt;
-  private final LocalDateTime lastModifiedAt;
-  private final long countAllComments;
+  private Long id;
+  private String nickname;
+  private CommunityCategory communityCategory;
+  private String title;
+  private String content;
+  @JsonSerialize(using = LocalDateTimeSerializer.class)
+  @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+  private LocalDateTime createdAt;
+  @JsonSerialize(using = LocalDateTimeSerializer.class)
+  @JsonDeserialize(using = LocalDateTimeDeserializer.class)
+  private LocalDateTime lastModifiedAt;
+  private long countAllComments;
 
   //  private long countAllReplyComments;
-  private final long boardLike;
+  private long boardLike;
 
   private boolean hasLike;
 

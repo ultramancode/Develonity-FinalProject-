@@ -269,43 +269,43 @@ public class BoardController {
         userDetails.getUser().getId());
   }
 
-//  //질문게시글 전체 조회(querydsl 이전방식)
-//  @GetMapping("/question-boards/before")
-//  public Page<QuestionBoardResponse> getQuestionBoardsPage(
-//      @AuthenticationPrincipal UserDetailsImpl userDetails,
-//      BoardPage questionBoardPage
-//  ) {
-//    return questionBoardService.getQuestionBoardPage(userDetails.getUser(), questionBoardPage);
-//  }
-//
-//
-//  //잡담게시글 전체 조회(querydsl 이전방식)
-//  @GetMapping("/community-boards/before")
-//  public Page<CommunityBoardResponse> getCommunityBoardsPage(
-//      @AuthenticationPrincipal UserDetailsImpl userDetails,
-//      BoardPage communityBoardPage
-//  ) {
-//    return communityBoardService.getCommunityBoardPage(userDetails.getUser(), communityBoardPage);
-//  }
-//
-//
-//  //질문게시글 전체 조회(테스트용)
-//  @GetMapping("/question-boards/test")
-//  public Page<QuestionBoardResponse> getTestQuestionBoardsPage(
-//      @AuthenticationPrincipal UserDetailsImpl userDetails,
-//      BoardPage questionBoardPage
-//  ) {
-//    return questionBoardService.getTestQuestionBoardPage(userDetails.getUser(), questionBoardPage);
-//  }
-//
-//  //잡담게시글 전체 조회(테스트용)
-//  @GetMapping("/community-boards/test")
-//  public Page<CommunityBoardResponse> getTestCommunityBoardsPage(
-//      @AuthenticationPrincipal UserDetailsImpl userDetails,
-//      BoardPage communityBoardPage
-//  ) {
-//    return communityBoardService.getTestCommunityBoardPage(userDetails.getUser(),
-//        communityBoardPage);
-//  }
+  //질문게시글 전체 조회(querydsl 이전방식)
+  @GetMapping("/question-boards/before")
+  public Page<QuestionBoardResponse> getQuestionBoardsPage(
+      @AuthenticationPrincipal UserDetailsImpl userDetails,
+      BoardPage questionBoardPage
+  ) {
+    return questionBoardService.getQuestionBoardPage(userDetails.getUser(), questionBoardPage);
+  }
+
+
+  //잡담게시글 전체 조회(querydsl 이전방식)
+  @GetMapping("/community-boards/before")
+  public Page<CommunityBoardResponse> getCommunityBoardsPage(
+      @AuthenticationPrincipal UserDetailsImpl userDetails,
+      BoardPage communityBoardPage
+  ) {
+    return communityBoardService.getCommunityBoardPage(userDetails.getUser(), communityBoardPage);
+  }
+
+
+  //질문게시글 전체 조회(테스트용)
+  @GetMapping("/question-boards/test")
+  public Page<QuestionBoardResponse> getTestQuestionBoardsPage(
+      @AuthenticationPrincipal UserDetailsImpl userDetails,
+      BoardPage questionBoardPage
+  ) {
+    return questionBoardService.getTestQuestionBoardPage(userDetails.getUser(), questionBoardPage);
+  }
+
+  //잡담게시글 전체 조회(테스트용)
+  @GetMapping("/community-boards/test")
+  public Page<CommunityBoardResponse> getTestCommunityBoardsPage(
+      @AuthenticationPrincipal UserDetailsImpl userDetails,
+      BoardPage communityBoardPage
+  ) {
+    return communityBoardService.getTestCommunityBoardPage(userDetails.getUser(),
+        communityBoardPage);
+  }
 
 }
