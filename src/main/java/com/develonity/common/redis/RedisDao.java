@@ -1,8 +1,10 @@
 package com.develonity.common.redis;
 
 import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -29,9 +31,13 @@ public class RedisDao {
     return values.get(key);
   }
 
-//  public boolean existByKey(String key) {
-//    return redisTemplate.hasKey(key);
-//  }
+  public void setBlackList(String key, String o, Long minutes){
+    redisTemplate.setValueSerializer(new Jackson2JsonRedisSerializer<>(o.getClass()));
+    redisTemplate.opsForValue().set(key, o, minutes, TimeUnit.MINUTES);
+  }
+  public String getBlackList(String key) {
+    return (String) redisTemplate.opsForValue().get(key);
+  }
 
   public void deleteValues(String key) {
     redisTemplate.delete(key);

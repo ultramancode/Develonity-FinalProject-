@@ -37,6 +37,7 @@ public class UserController {
   private final UserService userService;
   private final AwsPreSignedUrlService awsPreSignedUrlService;
 
+  private final JwtUtil jwtUtil;
 
   //preSignedURL 프로필 수정
   @PutMapping("/users/preSignedProfile")
@@ -68,8 +69,8 @@ public class UserController {
   }
 
   @PostMapping("/logout")
-  public ResponseEntity<String> logout(@AuthenticationPrincipal UserDetailsImpl userDetails) {
-    userService.logout(userDetails.getUser().getLoginId());
+  public ResponseEntity<String> logout(@AuthenticationPrincipal UserDetailsImpl userDetails, HttpServletRequest request) {
+    userService.logout(userDetails.getUser().getLoginId(), request);
     return new ResponseEntity<>("로그아웃 성공", HttpStatus.OK);
   }
 

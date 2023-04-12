@@ -19,6 +19,8 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -72,7 +74,9 @@ public class UserServiceImpl implements UserService {
 
   @Override
   @Transactional
-  public void logout(String loginId) {
+  public void logout(String loginId, HttpServletRequest request) {
+    String accessToken = jwtUtil.resolveAccessToken(request);
+    redisDao.setBlackList(accessToken, "logout", JwtUtil.ACCESS_TOKEN_TIME);
     deleteRefreshTokenFromRedis(loginId);
   }
 

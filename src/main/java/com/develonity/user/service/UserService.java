@@ -1,5 +1,6 @@
 package com.develonity.user.service;
 
+import com.amazonaws.thirdparty.apache.http.impl.bootstrap.HttpServer;
 import com.develonity.user.dto.LoginRequest;
 import com.develonity.user.dto.ProfileRequest;
 import com.develonity.user.dto.ProfileResponse;
@@ -9,6 +10,7 @@ import com.develonity.user.entity.User;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface UserService {
@@ -19,7 +21,7 @@ public interface UserService {
 
   void withdrawal(String loginId, String password);
 
-  void logout(String loginId);
+  void logout(String loginId, HttpServletRequest request);
 
   ProfileResponse getProfile(Long userId);
 

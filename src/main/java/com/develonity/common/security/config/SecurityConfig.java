@@ -3,6 +3,7 @@ package com.develonity.common.security.config;
 import com.develonity.common.auth.AdminAuthFilter;
 import com.develonity.common.auth.JwtUtil;
 import com.develonity.common.auth.UserAuthFilter;
+import com.develonity.common.redis.RedisDao;
 import com.develonity.common.security.exceptionHandler.CustomAccessDeniedHandler;
 import com.develonity.common.security.exceptionHandler.CustomAuthenticationEntryPoint;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +28,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class SecurityConfig implements WebMvcConfigurer {
 
   private final JwtUtil jwtUtil;
+
+  private final RedisDao redisDao;
 
 
   @Bean
@@ -67,7 +70,7 @@ public class SecurityConfig implements WebMvcConfigurer {
         .exceptionHandling().accessDeniedHandler(new CustomAccessDeniedHandler())
         .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
         .and()
-        .addFilterBefore(new UserAuthFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class)
+        .addFilterBefore(new UserAuthFilter(jwtUtil, redisDao), UsernamePasswordAuthenticationFilter.class)
         .addFilterBefore(new AdminAuthFilter(jwtUtil), UserAuthFilter.class);
 
     return http.build();
