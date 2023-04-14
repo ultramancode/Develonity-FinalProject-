@@ -82,14 +82,12 @@ public class UserServiceImpl implements UserService {
 
   @Override
   @Transactional
-  public void withdrawal(String loginId, String password) {
-    User user = userRepository.findByLoginId(loginId)
-        .orElseThrow(IllegalArgumentException::new);
+  public void withdrawal(User user, String password) {
     if (!passwordEncoder.matches(password, user.getPassword())) {
       throw new IllegalArgumentException("비밀번호 불일치");
     }
     user.withdraw();
-    deleteRefreshTokenFromRedis(loginId);
+    deleteRefreshTokenFromRedis(user.getLoginId());
   }
 
   //   RTR(refresh token rotation)을 적용하려면 현재 블랙리스트로 운영중인 refresh token 운영방식을

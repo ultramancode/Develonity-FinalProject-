@@ -19,7 +19,7 @@ public interface UserService {
 
   TokenResponse login(LoginRequest loginRequest);
 
-  void withdrawal(String loginId, String password);
+  void withdrawal(User user, String password);
 
   void logout(String loginId, HttpServletRequest request);
 

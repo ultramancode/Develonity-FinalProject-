@@ -63,7 +63,7 @@ public class UserController {
   public TokenResponse login(@RequestBody LoginRequest loginRequest,
       HttpServletResponse httpServletResponse) {
     TokenResponse tokenResponse = userService.login(loginRequest);
-    // 44라인은 일단 포스트맨 테스트의 용이성을 위해 넣어두었습니다. 추후 프론트 구현 이후에는 삭제 예정입니다.
+    //테스트의 용이성을 위해 넣어둠
     httpServletResponse.addHeader(JwtUtil.AUTHORIZATION_HEADER, tokenResponse.getAccessToken());
     return tokenResponse;
   }
@@ -77,7 +77,7 @@ public class UserController {
   @PatchMapping("/withdrawal")
   public ResponseEntity<String> withdrawal(@RequestBody WithdrawalRequest withdrawalRequest,
       @AuthenticationPrincipal UserDetailsImpl userDetails) {
-    userService.withdrawal(userDetails.getUsername(), withdrawalRequest.getPassword());
+    userService.withdrawal(userDetails.getUser(), withdrawalRequest.getPassword());
     return new ResponseEntity<>("회원탈퇴 성공", HttpStatus.OK);
   }
 
