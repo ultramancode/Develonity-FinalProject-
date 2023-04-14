@@ -21,7 +21,7 @@ public class ExecutionTimer {
   private void cut(){}
 
   // 메서드 실행 전,후로 시간을 공유해야 하기 때문에 Around 설정.
-  @Around("cut()")
+  @Around("cut()"/*@annotation(com.develonity.common.aop.LogExecution)*/)
   public Object AssumeExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
 
     StopWatch stopWatch = new StopWatch();
