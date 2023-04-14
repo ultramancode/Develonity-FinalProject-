@@ -43,12 +43,15 @@ dependencies {
     //자바 역직렬화 문제 해결 패키지
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
     implementation 'com.fasterxml.jackson.core:jackson-databind'
-
+    //aop 의존성
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
     //QueryDSL 적용을 위한 의존성
     implementation 'com.querydsl:querydsl-jpa'
     annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jpa"
     annotationProcessor "jakarta.annotation:jakarta.annotation-api"
     annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+
+
 
     testImplementation('it.ozimov:embedded-redis:0.7.3') {
         exclude group: 'org.slf4j', module: 'slf4j-simple'
