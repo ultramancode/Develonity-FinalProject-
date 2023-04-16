@@ -2,6 +2,7 @@ package com.develonity.admin.service;
 
 import com.develonity.admin.dto.RegisterResponse;
 import com.develonity.admin.dto.UserResponse;
+import com.develonity.common.security.users.AdminDetails;
 import com.develonity.user.entity.User;
 import com.develonity.user.entity.UserRole;
 import org.springframework.data.domain.Page;

@@ -31,13 +31,13 @@ public class AdminController {
 
   // 전체회원 조회(아이디, 실명, 닉네임, 롤) -  dTO를 User에서
   @GetMapping("/users")
-  public Page<UserResponse> getAllUsers(@AuthenticationPrincipal AdminDetails adminDetails){
+  public Page<UserResponse> getAllUsers(){
     return adminService.getAllUsers();}
 
 
   // 개인회원 조회(아이디, 실명, 닉네임, 비밀번호) 회원가입내역 전체조회로 Dto
   @GetMapping("/users/{id}")
-  public RegisterResponse getUsersinfo(@PathVariable Long id, User user){
+  public RegisterResponse getUsersInfo(@PathVariable Long id, User user){
     return adminService.getUsersInfo(id, user);}
 
 
