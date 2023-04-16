@@ -1,7 +1,7 @@
 package com.develonity.comment.controller;
 
 import com.develonity.comment.service.CommentLikeService;
-import com.develonity.common.security.users.UserDetailsImpl;
+import com.develonity.common.security.users.UserDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +37,7 @@ public class CommentLikeController {
   @PostMapping("/{commentId}/likes")
   public ResponseEntity<String> changeCommentLike(@PathVariable Long commentId,
       @AuthenticationPrincipal
-      UserDetailsImpl userDetails) {
+      UserDetails userDetails) {
     commentLikeService.addCommentLike(commentId, userDetails.getUser().getId());
     return new ResponseEntity<>("좋아요!", HttpStatus.CREATED);
   }
@@ -45,7 +45,7 @@ public class CommentLikeController {
   // 좋아요 취소 기능
   @DeleteMapping("/{commentId}/likes")
   public ResponseEntity<String> cancelCommentLike(@PathVariable Long commentId,
-      @AuthenticationPrincipal UserDetailsImpl userDetails) {
+      @AuthenticationPrincipal UserDetails userDetails) {
     commentLikeService.cancelCommentLike(commentId, userDetails.getUser().getId());
     return new ResponseEntity<>("좋아요 취소!", HttpStatus.OK);
   }

@@ -12,7 +12,7 @@ import org.springframework.data.domain.Page;
 public interface AdminService {
 
     //1. 회원을 전체조회 하는데 (페이지에 실명, 닉네임, 로그인 아이디, 유저역할)
-    Page<UserResponse> getAllUsers(User user);
+    Page<UserResponse> getAllUsers();
 
 
     //2. 회원을 상세하게 해서 조회, (페이징 필요..x) 상세조회

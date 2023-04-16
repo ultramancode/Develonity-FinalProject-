@@ -2,7 +2,7 @@ package com.develonity.comment.controller;
 
 import com.develonity.comment.dto.ReplyCommentRequest;
 import com.develonity.comment.service.ReplyCommentService;
-import com.develonity.common.security.users.UserDetailsImpl;
+import com.develonity.common.security.users.UserDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +25,7 @@ public class ReplyCommentController {
   @PostMapping("/api/comments")
   public ResponseEntity<String> createReplyComment(@RequestParam("comment-id") Long commentId,
       @RequestBody
-      ReplyCommentRequest request, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+      ReplyCommentRequest request, @AuthenticationPrincipal UserDetails userDetails) {
     replyCommentService.createReplyComment(commentId, request, userDetails.getUser());
     return new ResponseEntity<>("대댓글 작성 완료!", HttpStatus.CREATED);
   }
@@ -35,7 +35,7 @@ public class ReplyCommentController {
   public ResponseEntity<String> updateReplyComment(@PathVariable Long commentId,
       @PathVariable Long replyCommentId,
       @RequestBody ReplyCommentRequest request,
-      @AuthenticationPrincipal UserDetailsImpl userDetails) {
+      @AuthenticationPrincipal UserDetails userDetails) {
     replyCommentService.updateReplyComment(commentId, replyCommentId, request,
         userDetails.getUser());
     return new ResponseEntity<>("대댓글 수정 완료!", HttpStatus.OK);
@@ -46,7 +46,7 @@ public class ReplyCommentController {
   @DeleteMapping("/api/comments/{replyCommentId}")
   public ResponseEntity<String> deleteReplyComment(
       @PathVariable Long replyCommentId,
-      @AuthenticationPrincipal UserDetailsImpl userDetails) {
+      @AuthenticationPrincipal UserDetails userDetails) {
     replyCommentService.deleteReplyComment(replyCommentId, userDetails.getUser());
     return new ResponseEntity<>("대댓글 삭제 완료!", HttpStatus.OK);
   }

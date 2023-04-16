@@ -2,7 +2,7 @@ package com.develonity.user.controller;
 
 import com.develonity.common.auth.JwtUtil;
 import com.develonity.common.aws.service.AwsPreSignedUrlService;
-import com.develonity.common.security.users.UserDetailsImpl;
+import com.develonity.common.security.users.UserDetails;
 import com.develonity.user.dto.LoginRequest;
 import com.develonity.user.dto.ProfileRequest;
 import com.develonity.user.dto.ProfileResponse;
@@ -43,7 +43,7 @@ public class UserController {
   @PutMapping("/users/preSignedProfile")
   public ResponseEntity<String> updateProfileByPreSignedUrl(
       @RequestBody ProfileRequest request,
-      @AuthenticationPrincipal UserDetailsImpl userDetails) {
+      @AuthenticationPrincipal UserDetails userDetails) {
 
     if (userService.existsByUserId(userDetails.getUser().getId())) {
       userService.deleteProfileImage(userDetails.getUser().getId());
@@ -69,14 +69,14 @@ public class UserController {
   }
 
   @PostMapping("/logout")
-  public ResponseEntity<String> logout(@AuthenticationPrincipal UserDetailsImpl userDetails, HttpServletRequest request) {
+  public ResponseEntity<String> logout(@AuthenticationPrincipal UserDetails userDetails, HttpServletRequest request) {
     userService.logout(userDetails.getUser().getLoginId(), request);
     return new ResponseEntity<>("로그아웃 성공", HttpStatus.OK);
   }
 
   @PatchMapping("/withdrawal")
   public ResponseEntity<String> withdrawal(@RequestBody WithdrawalRequest withdrawalRequest,
-      @AuthenticationPrincipal UserDetailsImpl userDetails) {
+      @AuthenticationPrincipal UserDetails userDetails) {
     userService.withdrawal(userDetails.getUser(), withdrawalRequest.getPassword());
     return new ResponseEntity<>("회원탈퇴 성공", HttpStatus.OK);
   }
@@ -89,7 +89,7 @@ public class UserController {
 
   // 내 프로필조회
   @GetMapping("/user/me/profile")
-  public ProfileResponse getMyProfile(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+  public ProfileResponse getMyProfile(@AuthenticationPrincipal UserDetails userDetails) {
     return userService.getProfile(userDetails.getUserId());
   }
 
@@ -103,7 +103,7 @@ public class UserController {
 //  내 프로필 정보 수정 (닉네임, 프로필사진)
   @PutMapping("/user/me/profile")
   public ResponseEntity<String> profileUpdate(
-      @AuthenticationPrincipal UserDetailsImpl userDetails,
+      @AuthenticationPrincipal UserDetails userDetails,
       @RequestPart(required = false, name = "image") MultipartFile multipartFile,
       @RequestPart("request") ProfileRequest request) throws IOException {
 

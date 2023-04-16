@@ -17,7 +17,6 @@ import org.hibernate.annotations.DynamicInsert;
 
 @Entity
 @Getter
-@DynamicInsert
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn

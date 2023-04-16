@@ -4,7 +4,8 @@ import com.develonity.admin.dto.RegisterResponse;
 import com.develonity.admin.dto.UserResponse;
 import com.develonity.admin.repository.AdminUserRepository;
 import com.develonity.admin.service.AdminService;
-import com.develonity.common.security.users.UserDetailsImpl;
+import com.develonity.common.security.users.AdminDetails;
+import com.develonity.common.security.users.UserDetails;
 import com.develonity.user.entity.User;
 import com.develonity.user.entity.UserRole;
 import lombok.AllArgsConstructor;
@@ -30,8 +31,8 @@ public class AdminController {
 
   // 전체회원 조회(아이디, 실명, 닉네임, 롤) -  dTO를 User에서
   @GetMapping("/users")
-  public Page<UserResponse> getAllUsers(@AuthenticationPrincipal UserDetailsImpl userDetails){
-    return adminService.getAllUsers(userDetails.getUser());}
+  public Page<UserResponse> getAllUsers(@AuthenticationPrincipal AdminDetails adminDetails){
+    return adminService.getAllUsers();}
 
 
   // 개인회원 조회(아이디, 실명, 닉네임, 비밀번호) 회원가입내역 전체조회로 Dto

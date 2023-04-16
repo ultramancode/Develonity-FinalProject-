@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
-  @Cacheable(cacheNames = CacheNames.LoginId, key="'login'+#p0", unless="#result==null")
+  @Cacheable(cacheNames = CacheNames.LOGIN_ID, key="'login'+#p0", unless="#result==null")
   Optional<User> findByLoginId(String loginId);
 
   boolean existsByLoginId(String loginId);

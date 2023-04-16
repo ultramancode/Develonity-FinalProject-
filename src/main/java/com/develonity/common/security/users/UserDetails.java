@@ -6,16 +6,15 @@ import java.util.ArrayList;
 import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
-public class UserDetailsImpl implements UserDetails {
+public class UserDetails implements org.springframework.security.core.userdetails.UserDetails {
 
   private final User user;
   private final String username;
 
   private final Long userId;
 
-  public UserDetailsImpl(User user, String loginId, Long userId) {
+  public UserDetails(User user, String loginId, Long userId) {
     this.user = user;
     this.username = loginId;
     this.userId = userId;

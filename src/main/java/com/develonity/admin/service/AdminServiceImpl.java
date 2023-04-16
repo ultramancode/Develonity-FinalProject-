@@ -3,10 +3,12 @@ package com.develonity.admin.service;
 import com.develonity.admin.dto.RegisterResponse;
 import com.develonity.admin.dto.UserResponse;
 import com.develonity.admin.repository.AdminUserRepository;
+import com.develonity.cache.CacheNames;
 import com.develonity.user.entity.User;
 import com.develonity.user.entity.UserRole;
 import com.develonity.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -29,7 +31,8 @@ public class AdminServiceImpl implements com.develonity.admin.service.AdminServi
   //1.회원 리스트로 해서 페이징에다가 전체조회(loginId, realName,Nickname,UserRole)
   @Override
   @Transactional(readOnly = true)
-  public Page<UserResponse> getAllUsers(User user) {
+  @Cacheable(cacheNames = CacheNames.ALL_USERS)
+  public Page<UserResponse> getAllUsers() {
     Page<User> userPage = adminUserRepository.findAll(PageRequest.of(0, 20));
     return userPage.map(UserResponse::new);
   }

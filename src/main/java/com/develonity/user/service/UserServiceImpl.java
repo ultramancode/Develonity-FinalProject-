@@ -1,5 +1,6 @@
 package com.develonity.user.service;
 
+import com.develonity.cache.CacheNames;
 import com.develonity.common.auth.JwtUtil;
 import com.develonity.common.aws.service.AwsPreSignedUrlService;
 import com.develonity.common.aws.service.AwsS3Service;
@@ -22,6 +23,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,6 +46,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   @Transactional
+  @CacheEvict(cacheNames = CacheNames.ALL_USERS, key = "'SimpleKey []'")
   public User register(RegisterRequest registerRequest) {
     if (userRepository.existsByLoginId(registerRequest.getLoginId())) {
       throw new IllegalArgumentException("회원 중복");
@@ -82,6 +85,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   @Transactional
+  @CacheEvict(cacheNames = CacheNames.ALL_USERS, key = "'SimpleKey []'")
   public void withdrawal(User user, String password) {
     if (!passwordEncoder.matches(password, user.getPassword())) {
       throw new IllegalArgumentException("비밀번호 불일치");
@@ -143,6 +147,7 @@ public class UserServiceImpl implements UserService {
   //프로필 수정
   @Override
   @Transactional
+  @CacheEvict(cacheNames = CacheNames.ALL_USERS, key = "'SimpleKey []'")
   public void updateProfile(ProfileRequest request, MultipartFile multipartFile, User user)
       throws IOException {
 
@@ -159,6 +164,7 @@ public class UserServiceImpl implements UserService {
   //프로필 수정 preSignedUrl 방식
   @Transactional
   @Override
+  @CacheEvict(cacheNames = CacheNames.ALL_USERS, key = "'SimpleKey []'")
   public void updateProfileByPreSignedUrl(ProfileRequest request, String imagePath, User user) {
     ProfileImage profileImage = new ProfileImage(imagePath, user.getId());
     profileImageRepository.save(profileImage);
@@ -224,6 +230,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   @Transactional
+  @CacheEvict(cacheNames = CacheNames.ALL_USERS, key = "'SimpleKey []'")
   public void upgradeGrade(Long userId) {
     User user = getUserAndCheck(userId);
     user.upgradeGrade();

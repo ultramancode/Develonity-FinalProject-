@@ -10,7 +10,7 @@ import com.develonity.comment.entity.Comment;
 import com.develonity.comment.service.CommentService;
 import com.develonity.common.exception.CustomException;
 import com.develonity.common.exception.ExceptionStatus;
-import com.develonity.common.security.users.UserDetailsImpl;
+import com.develonity.common.security.users.UserDetails;
 import com.develonity.user.entity.User;
 import com.develonity.user.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -49,7 +49,7 @@ public class CommentController {
   //게시글별 댓글 대댓글 전체 조회
   @GetMapping("/api/comments")
   public Page<CommentResponse> getScrapsPage(
-      @AuthenticationPrincipal UserDetailsImpl userDetails,
+      @AuthenticationPrincipal UserDetails userDetails,
       @RequestParam Long boardId
   ) {
     return commentService.getCommentsByBoard(boardId, userDetails.getUser());
@@ -59,7 +59,7 @@ public class CommentController {
   // Querydsl 내가 쓴 댓글 전체 조회
   @GetMapping("/api/user/me/comments")
   public Page<CommentResponse> getMyComments(CommentPageDto commentPageDto,
-      CommentSearchCond commentSearchCond, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+      CommentSearchCond commentSearchCond, @AuthenticationPrincipal UserDetails userDetails) {
     return commentService.getMyComments(commentPageDto, commentSearchCond,
         userDetails.getUser().getId());
   }
@@ -70,7 +70,7 @@ public class CommentController {
   public ResponseEntity<String> createQuestionComment(
       @RequestParam Long questionBoardId,
       @RequestBody
-      CommentRequest requestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+      CommentRequest requestDto, @AuthenticationPrincipal UserDetails userDetails) {
     if (questionBoardService.getQuestionBoardAndCheckSameUser(questionBoardId,
         userDetails.getUserId())) {
       throw new CustomException(ExceptionStatus.NOT_ALLOWED);
@@ -83,7 +83,7 @@ public class CommentController {
   @PutMapping("/api/question-comments/{commentId}")
   public ResponseEntity<String> updateQuestionComment(
       @PathVariable Long commentId, @RequestBody CommentRequest request,
-      @AuthenticationPrincipal UserDetailsImpl userDetails) {
+      @AuthenticationPrincipal UserDetails userDetails) {
     commentService.updateQuestionComment(commentId, request,
         userDetails.getUser());
     return new ResponseEntity<>("답변 수정 완료!", HttpStatus.OK);
@@ -93,7 +93,7 @@ public class CommentController {
   @DeleteMapping("/api/question-comments/{commentId}")
   public ResponseEntity<String> deleteQuestionComment(
       @PathVariable Long commentId,
-      @AuthenticationPrincipal UserDetailsImpl userDetails) {
+      @AuthenticationPrincipal UserDetails userDetails) {
     commentService.deleteQuestionComment(commentId, userDetails.getUser());
     return new ResponseEntity<>("답변 삭제 완료!", HttpStatus.OK);
   }
@@ -102,7 +102,7 @@ public class CommentController {
   @PostMapping("/api/comments/{commentId}/adoption")
   public ResponseEntity<String> adoptComment(@PathVariable Long commentId,
       @RequestParam Long boardId,
-      @AuthenticationPrincipal UserDetailsImpl userDetails) {
+      @AuthenticationPrincipal UserDetails userDetails) {
 
     QuestionBoard questionBoard = questionBoardService.getQuestionBoardAndCheck(boardId);
     Comment comment = commentService.getComment(commentId);
@@ -122,7 +122,7 @@ public class CommentController {
   @PostMapping("/api/community-comments")
   public ResponseEntity<String> createCommunityComment(
       @RequestParam Long communityBoardId,
-      @RequestBody CommentRequest request, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+      @RequestBody CommentRequest request, @AuthenticationPrincipal UserDetails userDetails) {
     commentService.createCommunityComment(communityBoardId, request, userDetails.getUser());
     return new ResponseEntity<>("잡담 댓글 작성 완료!", HttpStatus.CREATED);
   }
@@ -131,7 +131,7 @@ public class CommentController {
   @PutMapping("/api/community-comments/{commentId}")
   public ResponseEntity<String> updateCommunityComment(
       @PathVariable Long commentId, @RequestBody CommentRequest request,
-      @AuthenticationPrincipal UserDetailsImpl userDetails) {
+      @AuthenticationPrincipal UserDetails userDetails) {
     commentService.updateCommunityComment(commentId, request,
         userDetails.getUser());
     return new ResponseEntity<>("잡담 댓글 수정 완료!", HttpStatus.OK);
@@ -141,7 +141,7 @@ public class CommentController {
   @DeleteMapping("/api/community-comments/{commentId}")
   public ResponseEntity<String> deleteCommunityComment(
       @PathVariable Long commentId,
-      @AuthenticationPrincipal UserDetailsImpl userDetails) {
+      @AuthenticationPrincipal UserDetails userDetails) {
     commentService.deleteCommunity(commentId, userDetails.getUser());
     return new ResponseEntity<>("잡담 댓글 삭제 완료!", HttpStatus.OK);
   }

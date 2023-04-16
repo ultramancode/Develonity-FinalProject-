@@ -3,7 +3,7 @@ package com.develonity.common.aws.controller;
 import com.develonity.board.dto.ImageNameRequest;
 import com.develonity.common.aws.dto.PreSignedUrlResponse;
 import com.develonity.common.aws.service.AwsPreSignedUrlService;
-import com.develonity.common.security.users.UserDetailsImpl;
+import com.develonity.common.security.users.UserDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +24,7 @@ public class AwsPreSignedUrlController {
   @PostMapping("/preSignedUrl/upload")
   public PreSignedUrlResponse createPutPreSignedUrl(
       @RequestBody ImageNameRequest imageNameRequest,
-      @AuthenticationPrincipal UserDetailsImpl userDetails,
+      @AuthenticationPrincipal UserDetails userDetails,
       @RequestParam String path/*user, order ,board..디렉토리*/) {
 
     String imageName = imageNameRequest.getImageName();
@@ -36,7 +36,7 @@ public class AwsPreSignedUrlController {
   @GetMapping("/preSignedUrl/get")
   public String createGetPreSignedUrl(
       @RequestParam("fileName") String fileName,
-      @AuthenticationPrincipal UserDetailsImpl userDetails) {
+      @AuthenticationPrincipal UserDetails userDetails) {
 
     return awsPreSignedUrlService.getPreSignedUrl(fileName);
 
