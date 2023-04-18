@@ -114,8 +114,8 @@ class BoardLikeServiceImplTest {
     CommunityBoard createCommunityBoard = communityBoardService.createCommunityBoard(request,
         multipartFiles, findUser.get());
 
-    assertThat(boardLikeRepository.existsBoardLikeByBoardIdAndUserId(createCommunityBoard.getId(), findUser.get().getId())).isEqualTo(false);
+    assertThat(boardLikeRepository.existsBoardLikeByBoardIdAndUserId(createCommunityBoard.getId(), findUser.get().getId())).isFalse();
     boardLikeService.addBoardLike(findUser.get().getId(), createCommunityBoard.getId());
-    assertThat(boardLikeRepository.existsBoardLikeByBoardIdAndUserId(createCommunityBoard.getId(), findUser.get().getId())).isEqualTo(true);
+    assertThat(boardLikeRepository.existsBoardLikeByBoardIdAndUserId(createCommunityBoard.getId(), findUser.get().getId())).isTrue();
   }
 }

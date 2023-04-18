@@ -2,17 +2,22 @@ package com.develonity.board.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.develonity.board.dto.CommunityBoardRequest;
 import com.develonity.board.dto.PageDto;
 import com.develonity.board.dto.QuestionBoardRequest;
 import com.develonity.board.dto.QuestionBoardResponse;
 import com.develonity.board.dto.QuestionBoardSearchCond;
 import com.develonity.board.dto.QuestionBoardUpdateRequest;
 import com.develonity.board.entity.BoardImage;
+import com.develonity.board.entity.CommunityBoard;
+import com.develonity.board.entity.CommunityCategory;
 import com.develonity.board.entity.QuestionBoard;
 import com.develonity.board.entity.QuestionCategory;
 import com.develonity.board.repository.BoardImageRepository;
 import com.develonity.board.repository.BoardLikeRepository;
 import com.develonity.board.repository.QuestionBoardRepository;
+import com.develonity.common.exception.CustomException;
+import com.develonity.common.exception.ExceptionStatus;
 import com.develonity.user.entity.User;
 import com.develonity.user.repository.UserRepository;
 import java.io.IOException;
@@ -20,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -67,7 +73,7 @@ class QuestionBoardServiceImplTest {
   void createQuestionBoard() throws IOException {
     //given
     QuestionBoardRequest request = new QuestionBoardRequest("제목5", "내용5",
-        100, QuestionCategory.AI);
+        0, QuestionCategory.AI);
 
     Optional<User> findUser = userRepository.findById(1L);
     Optional<User> readUser = userRepository.findById(2L);
@@ -114,7 +120,7 @@ class QuestionBoardServiceImplTest {
   void createEmptyImageQuestionBoard() throws IOException {
     //given
     QuestionBoardRequest request = new QuestionBoardRequest("제목6", "내용6",
-        90, QuestionCategory.AI);
+        0, QuestionCategory.AI);
 
     Optional<User> findUser = userRepository.findById(1L);
     Optional<User> readUser = userRepository.findById(2L);
@@ -160,7 +166,7 @@ class QuestionBoardServiceImplTest {
 
 // 질문게시글 생성
     QuestionBoardRequest request = new QuestionBoardRequest("제목4", "내용4",
-        5, QuestionCategory.BACKEND);
+        0, QuestionCategory.BACKEND);
     List<MultipartFile> multipartFiles = new ArrayList<>();
     MockMultipartFile multipartFile = new MockMultipartFile("files", "imageFile.jpeg", "image/jpeg",
         "<<jpeg data>>".getBytes());
@@ -211,7 +217,7 @@ class QuestionBoardServiceImplTest {
 
     Optional<User> findUser = userRepository.findById(1L);
     QuestionBoardRequest request = new QuestionBoardRequest("제목4", "내용4",
-        5, QuestionCategory.BACKEND);
+        0, QuestionCategory.BACKEND);
     List<MultipartFile> multipartFiles = new ArrayList<>();
     MockMultipartFile multipartFile = new MockMultipartFile("files", "imageFile.jpeg", "image/jpeg",
         "<<jpeg data>>".getBytes());
@@ -267,7 +273,7 @@ class QuestionBoardServiceImplTest {
     //질문게시글 생성
     Optional<User> findUser = userRepository.findById(1L);
     QuestionBoardRequest request = new QuestionBoardRequest("제목4", "내용4",
-        5, QuestionCategory.BACKEND);
+        0, QuestionCategory.BACKEND);
     QuestionBoard createdQuestionBoard = questionBoardService.createQuestionBoard(request,
         null, findUser.get());
 
@@ -349,5 +355,50 @@ class QuestionBoardServiceImplTest {
         condCategory, pageDto);
     assertThat(responsesCategory.getTotalElements()).isEqualTo(1);
 
+  }
+
+  @Test
+  @DisplayName("질문글 작성 유저인지 예외 체크")
+  void checkUserByQuestionBoard() throws IOException {
+    QuestionBoardRequest request = new QuestionBoardRequest("제목6", "내용6",
+        0, QuestionCategory.AI);
+
+    Optional<User> rightUser = userRepository.findById(1L);
+    Optional<User> wrongUser = userRepository.findById(2L);
+
+    List<MultipartFile> multipartFiles = new ArrayList<>();
+
+    //when
+    QuestionBoard createQuestionBoard = questionBoardService.createQuestionBoard(request,
+        multipartFiles, rightUser.get());
+
+
+    //then
+    Assertions.assertThrows(CustomException.class, () -> questionBoardService.checkUser(createQuestionBoard, wrongUser.get().getId()));
+  }
+
+  //게시글 가져오기 + 있는지 확인
+  @Test
+  @DisplayName("질문글 존재 여부 체크 및 리턴")
+  void getQuestionBoardAndCheck() throws IOException {
+
+    QuestionBoardRequest request = new QuestionBoardRequest("제목6", "내용6",
+        0, QuestionCategory.AI);
+
+    Optional<User> findUser = userRepository.findById(1L);
+
+    List<MultipartFile> multipartFiles = new ArrayList<>();
+
+    //when
+    QuestionBoard createQuestionBoard = questionBoardService.createQuestionBoard(request,
+        multipartFiles, findUser.get());
+
+
+    assertThat(questionBoardService.getQuestionBoardAndCheck(createQuestionBoard.getId())).isNotNull();
+    assertThat(questionBoardService.isExistBoard(createQuestionBoard.getId())).isTrue();
+    //게시글 삭제 후 해당 게시글 존재 여부 예외 뜨는지 확인
+    questionBoardService.deleteQuestionBoard(createQuestionBoard.getId(), findUser.get());
+    assertThat(questionBoardService.isExistBoard(createQuestionBoard.getId())).isFalse();
+    Assertions.assertThrows(CustomException.class, () -> questionBoardService.getQuestionBoardAndCheck(createQuestionBoard.getId()));
   }
 }

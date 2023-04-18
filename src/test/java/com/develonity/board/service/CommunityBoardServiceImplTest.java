@@ -12,6 +12,8 @@ import com.develonity.board.entity.CommunityCategory;
 import com.develonity.board.repository.BoardImageRepository;
 import com.develonity.board.repository.BoardLikeRepository;
 import com.develonity.board.repository.CommunityBoardRepository;
+import com.develonity.common.exception.CustomException;
+import com.develonity.common.exception.ExceptionStatus;
 import com.develonity.user.entity.User;
 import com.develonity.user.repository.UserRepository;
 import java.io.IOException;
@@ -19,13 +21,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 @SpringBootTest
@@ -340,5 +345,69 @@ class CommunityBoardServiceImplTest {
     Page<CommunityBoardResponse> responsesCategory = communityBoardService.searchCommunityBoardByCond(
         condCategory, pageDto);
     assertThat(responsesCategory.getTotalElements()).isEqualTo(1);
+  }
+
+
+
+  @Test
+  @DisplayName("잡담글 작성 유저인지 예외 체크")
+  void checkUser() throws IOException {
+
+    CommunityBoardRequest request = new CommunityBoardRequest("제목생성", "내용생성",
+        CommunityCategory.NORMAL);
+
+    Optional<User> rightUser = userRepository.findById(1L);
+    Optional<User> wrongUser = userRepository.findById(2L);
+
+    List<MultipartFile> multipartFiles = new ArrayList<>();
+
+    CommunityBoard createCommunityBoard = communityBoardService.createCommunityBoard(request,
+        multipartFiles, rightUser.get());
+
+    //then
+    Assertions.assertThrows(CustomException.class, () -> communityBoardService.checkUser(createCommunityBoard, wrongUser.get().getId()));
+    }
+
+
+  @Test
+  @DisplayName("잡담글 존재 여부 체크 및 리턴")
+  void getCommunityBoardAndCheck() throws IOException {
+
+
+    CommunityBoardRequest request = new CommunityBoardRequest("제목생성", "내용생성",
+        CommunityCategory.NORMAL);
+
+    Optional<User> findUser = userRepository.findById(1L);
+
+    List<MultipartFile> multipartFiles = new ArrayList<>();
+
+    CommunityBoard createCommunityBoard = communityBoardService.createCommunityBoard(request,
+        multipartFiles, findUser.get());
+
+    assertThat(communityBoardService.getCommunityBoardAndCheck(createCommunityBoard.getId())).isNotNull();
+    assertThat(communityBoardService.existsBoard(createCommunityBoard.getId())).isTrue();
+    //게시글 삭제 후 해당 게시글 존재 여부 예외 뜨는지 확인
+    communityBoardService.deleteCommunityBoard(createCommunityBoard.getId(), findUser.get());
+    assertThat(communityBoardService.existsBoard(createCommunityBoard.getId())).isFalse();
+    Assertions.assertThrows(CustomException.class, () -> communityBoardService.getCommunityBoardAndCheck(createCommunityBoard.getId()));
+
+  }
+
+  @Test
+  @DisplayName("등업 게시글이 맞는지 여부 확인")
+  public void isGradeBoard() throws IOException {
+
+
+    CommunityBoardRequest request = new CommunityBoardRequest("제목생성", "내용생성",
+        CommunityCategory.GRADE);
+
+    Optional<User> findUser = userRepository.findById(1L);
+
+    List<MultipartFile> multipartFiles = new ArrayList<>();
+
+    CommunityBoard createCommunityBoard = communityBoardService.createCommunityBoard(request,
+        multipartFiles, findUser.get());
+
+    assertThat(communityBoardService.isGradeBoard(createCommunityBoard.getId())).isTrue();
   }
 }

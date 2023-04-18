@@ -194,7 +194,7 @@ public class BoardController {
   @PostMapping("/community-boards/{boardId}/likes")
   public ResponseEntity<String> addCommunityBoardLike(@PathVariable Long boardId,
       @AuthenticationPrincipal UserDetails userDetails) {
-    if (!communityBoardService.ExistsBoard(boardId)) {
+    if (!communityBoardService.existsBoard(boardId)) {
       throw new CustomException(ExceptionStatus.BOARD_IS_NOT_EXIST);
     }
     boardLikeService.addBoardLike(userDetails.getUser().getId(), boardId);
@@ -213,7 +213,7 @@ public class BoardController {
   @PostMapping("/community-boards/{boardId}/grade")
   public ResponseEntity<String> changeGrade(@PathVariable Long boardId,
       @AuthenticationPrincipal UserDetails userDetails) {
-    if (!communityBoardService.ExistsBoard(boardId)) {
+    if (!communityBoardService.existsBoard(boardId)) {
       throw new CustomException(ExceptionStatus.BOARD_IS_NOT_EXIST);
     }
     if (!communityBoardService.isGradeBoard(boardId)) {

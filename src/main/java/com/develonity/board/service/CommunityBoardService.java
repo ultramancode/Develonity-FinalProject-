@@ -31,7 +31,7 @@ public interface CommunityBoardService {
 
   long countLike(Long boardId);
 
-  Boolean ExistsBoard(Long boardId);
+  Boolean existsBoard(Long boardId);
 
   String getNickname(Long userId);
 

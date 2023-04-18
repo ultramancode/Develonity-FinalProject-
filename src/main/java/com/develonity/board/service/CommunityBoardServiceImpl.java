@@ -164,7 +164,7 @@ public class CommunityBoardServiceImpl implements CommunityBoardService {
   }
 
   @Override
-  public Boolean ExistsBoard(Long boardId) {
+  public Boolean existsBoard(Long boardId) {
     return communityBoardRepository.existsBoardById(boardId);
   }
 
