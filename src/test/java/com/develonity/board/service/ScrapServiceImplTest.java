@@ -21,6 +21,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 @SpringBootTest
@@ -89,7 +90,7 @@ class ScrapServiceImplTest {
   }
 
   @Test
-  @DisplayName("스크랩한 게시물 조회")
+  @DisplayName("스크랩한 게시물 ID들 리턴")
   void getScrapBoardIds() throws IOException {
 
     Optional<User> findUser = userRepository.findById(1L);
@@ -101,9 +102,40 @@ class ScrapServiceImplTest {
     scrapService.addScrap(findUser.get().getId(), createCommunityBoard.getId());
     scrapService.addScrap(findUser.get().getId(), createCommunityBoard2.getId());
 
-    List<Scrap> scraps = scrapRepository.findAllByUserId(findUser.get().getId());
+    assertThat(scrapService.getScrapBoardIds(findUser.get().getId())).size().isEqualTo(2);
 
-    assertThat(scraps).size().isEqualTo(2);
+  }
+
+  //유저가 총 스크랩한 갯수
+  @Test
+  @DisplayName("스크랩한 게시물 갯수")
+  void countScraps() throws IOException {
+    Optional<User> findUser = userRepository.findById(1L);
+    CommunityBoard createCommunityBoard = communityBoardService.createCommunityBoard(request2,
+        multipartFiles, findUser.get());
+
+    scrapService.addScrap(findUser.get().getId(), createCommunityBoard.getId());
+
+    assertThat(scrapService.countScraps(findUser.get().getId())).isEqualTo(1L);
+
+  }
+
+
+  //해당 유저가 해당 게시글에 스크랩 했는지 여부
+  @Test
+  @DisplayName("현재 유저가 해당 게시글 스크랩 했는지 여부")
+  public void existsScrapBoardIdAndUserId() throws IOException {
+
+    Optional<User> findUser = userRepository.findById(1L);
+    CommunityBoard createCommunityBoard = communityBoardService.createCommunityBoard(request2,
+        multipartFiles, findUser.get());
+    CommunityBoard createCommunityBoard2 = communityBoardService.createCommunityBoard(request,
+        multipartFiles2, findUser.get());
+
+    scrapService.addScrap(findUser.get().getId(), createCommunityBoard.getId());
+
+    assertThat(scrapService.existsScrapBoardIdAndUserId(createCommunityBoard.getId(), findUser.get().getId())).isTrue();
+    assertThat(scrapService.existsScrapBoardIdAndUserId(createCommunityBoard2.getId(), findUser.get().getId())).isFalse();
   }
 }
 
