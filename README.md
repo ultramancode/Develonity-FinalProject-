@@ -1,9 +1,11 @@
-# Develonity([Notion 링크✔️](https://gilded-fibula-776.notion.site/Develonity-23422bae15a04a9d8107d43d742264c6))
+# Develonity
 > `Developer` + `Community` = `Develonity` 
 >
 - **입문 & 주니어 & 시니어 개발자 모두에게 가치 있는 커뮤니티를 만들고자 했습니다.**
-- Q&A 게시판 활동(답변)을 통해 `Gift Point` 를 쌓고, 포인트로 `Gift Card` 를 살 수 있습니다.
-- [미구현] Q&A 게시판 활동(답변)을 통해 단순히 `Gift Point` 뿐만 아니라 `Respect Point` 가 쌓이게 되고, `Respect Point` 를 기반으로 `외주, 과외 등의 서비스` 를 제공하고자 했습니다.
+- Q&A 게시판 활동(답변)을 통해 `Gift Point`를 쌓을 수 있습니다. 해당 포인트로 `Gift Card` 를 살 수 있습니다.
+- 커뮤니티 활동을 통해 `Respect Point` 가 쌓이게 되고, 이를 통해 등급을 올릴 수 있습니다.
+
+<br>
 
 ![브로셔메인페이지](https://user-images.githubusercontent.com/116135174/224562613-25b15240-4157-4a6c-a908-69a7a942bf95.PNG)
 
@@ -12,11 +14,10 @@
 
 
 
-| [조성현](https://github.com/dangddoong) | [이솔](https://github.com/LEESOLL) | [김태웅](https://github.com/ultramancode) | [배지호](https://github.com/2Luda) | [송성원](https://github.com/SungWonSong) |
+| [김태웅](https://github.com/ultramancode) | [이솔](https://github.com/LEESOLL) | [조성현](https://github.com/dangddoong) | [배지호](https://github.com/2Luda) | [송성원](https://github.com/SungWonSong) |
 | :---:| :---: | :---: | :---: | :---: |
-| <img src="https://taewoong-test.s3.ap-northeast-2.amazonaws.com/pp/KakaoTalk_20230313_163501658.jpg" width="135" height="160"> | <img src="https://taewoong-test.s3.ap-northeast-2.amazonaws.com/pp/KakaoTalk_20230313_163720357.jpg" width="135" height="160">  | <img src="https://taewoong-test.s3.ap-northeast-2.amazonaws.com/pp/KakaoTalk_20230313_164601238_01.jpg" width="135" height="160"> | <img src="https://taewoong-test.s3.ap-northeast-2.amazonaws.com/pp/KakaoTalk_20230313_164603334.jpg" width="135" height="160"> | <img src="https://taewoong-test.s3.ap-northeast-2.amazonaws.com/pp/KakaoTalk_20230313_163841527.jpg" width="135" height="160"> |
-|리더|부리더|팀원|팀원|팀원|
-| [<img src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=GitHub&logoColor=white">](https://github.com/dangddoong) | [<img src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=GitHub&logoColor=white">](https://github.com/LEESOLL) | [<img src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=GitHub&logoColor=white">](https://github.com/ultramancode) | [<img src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=GitHub&logoColor=white">](https://github.com/2Luda) | [<img src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=GitHub&logoColor=white">](https://github.com/SungWonSong) | 
+| <img src="https://taewoong-test.s3.ap-northeast-2.amazonaws.com/pp/KakaoTalk_20230313_164601238_01.jpg" width="135" height="160"> | <img src="https://taewoong-test.s3.ap-northeast-2.amazonaws.com/pp/KakaoTalk_20230313_163720357.jpg" width="135" height="160">  | <img src="https://taewoong-test.s3.ap-northeast-2.amazonaws.com/pp/KakaoTalk_20230313_163501658.jpg" width="135" height="160"> | <img src="https://taewoong-test.s3.ap-northeast-2.amazonaws.com/pp/KakaoTalk_20230313_164603334.jpg" width="135" height="160"> | <img src="https://taewoong-test.s3.ap-northeast-2.amazonaws.com/pp/KakaoTalk_20230313_163841527.jpg" width="135" height="160"> |
+| [<img src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=GitHub&logoColor=white">](https://github.com/ultramancode) | [<img src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=GitHub&logoColor=white">](https://github.com/LEESOLL) | [<img src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=GitHub&logoColor=white">](https://github.com/dangddoong) | [<img src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=GitHub&logoColor=white">](https://github.com/2Luda) | [<img src="https://img.shields.io/badge/GitHub-181717?style=flat&logo=GitHub&logoColor=white">](https://github.com/SungWonSong) | 
 
 
 
@@ -90,8 +91,7 @@ API 문서(Postman Publish Documentation)📋
 
 >**해결책**
 >- refresh token을 도입하여 access token의 유효기간을 짧게 가져감
->- RTR(refresh token rotation)을 도입하여 refresh token 탈취 시 문제점 완
->- 계정정보 or 회원탈퇴 등 중요한 기능들은 ‘비밀번호 검증＇을 1회 더 하는 방식으로 보안 강화
+>- RTR(refresh token rotation)을 도입하여 refresh token 탈취 시 문제점 보완
 
 <details><summary>➕access token과 refresh token이 모두 탈취 당했을 경우에 대한 고민🤷</summary>
 <br>
@@ -107,10 +107,6 @@ API 문서(Postman Publish Documentation)📋
 - 사용자가 서비스를 지속적으로 이용중인 상황<br>
    - RTR(refresh token rotation)을 적용하고 access token의 유효시간을 30분으로 짧게 설정<br>
    - `[reissue 실패 → 재로그인 → 탈취된 refresh token 무효화]` 가능<br>
-   
-- 토큰이 지속적으로 탈취되는 상황
-   - 해당 회원을 일단 `탈퇴처리`, 해커의 나쁜 행동을 막고, 
-   - 개인적으로 네트워크와 컴퓨터를 리셋(포맷)한 이후 다시 `계정 복구`(soft delete 방식으로 회원 탈퇴 기능 구현)<br>
   
 - 특정 상황이 발생하여 회원 다수의 token이 탈취된 경우
    - 30분여 서비스 점검 실시(access token 유효기간 만료를 위함) 및 
@@ -123,15 +119,32 @@ API 문서(Postman Publish Documentation)📋
 <details>
 <summary>Redis - Token 저장소로 Redis를 선정한 이유</summary><br><br>
 
->-  Key(LoginId)-Value(Refresh Token) 외의 다른 필드가 필요하지 않음
->-  I/O가 빈번하게 발생하는 환경
->- 저장된 데이터의 개수와 무관하게 `O(1)` 의 수행시간을 가짐
->- 저장된 모든 token을 조회하는 등의 싱글 스레드의 단점이 부각 될 상황이 없음
+>- Key(LoginId)-Value(Refresh Token) 외의 다른 필드가 필요하지 않음
+>- 인메모리 데이터 저장소이므로 빠르게 접근 가능
+>- Refresh Token은 영구적으로 저장될 필요가 없으며 Redis의 TTL(Time To Live) 지정을 통해 만료 기간을 쉽게 설정 가능
+>- Redis의 데이터가 날아가더라도 로그아웃되는 정도라서 덜 치명적임
+>- RDB의 스냅샷 백업 기능을 활용하여 디스크 저장 가능, 추후 더욱 안정성 있는 백업 기능을 원하면 AOF 방식으로 변경 가능
+>- 저장된 데이터의 개수와 무관하게 O(1) 의 수행시간을 가짐
+>- 저장된 모든 token을 조회할 일이 없어, 싱글 스레드의 단점이 부각 될 상황이 없음
+<br><br>
+
+### **인메모리 데이터 저장소 중 왜 Redis를 선택했는가?(Redis vs Memcached)**
+
+인메모리 데이터 저장소로 성능과 대중성을 갖춘 것은 **Redis**와 **Memcached**가 있음
+
+두 저장소 중에 무엇을 사용할까 고민했고, 아래와 같은 이유로 **Redis를 선택**하게 됨
+
+>- 문자열만 지원하는 Memcached와 달리 Redis는 문자열 및 List, Set 등의 다양한 데이터 타입을 지원해서 확장성이 큼
+>- Redis는 RDB방식과 AOF 방식으로 디스크 백업 기능을 지원함
+>- Redis가 더 다양한 기능을 제공하는데 성능은 Memcached와 비슷하고, 문서화된 자료도 많으며 Spring Boot에서 Redis를 위한 API를 지원함
+    
+    →러닝커브도 낮고, 유지 보수성 측면에서 유리하다고 판단
+    
 <br><br>
 </details>
 
 <details>
-<summary>Admin과 User 분리</summary><br>
+<summary>Admin과 User 분리(Factory Pattern)</summary><br>
 
 
 **기존 방식**
@@ -262,106 +275,256 @@ API 문서(Postman Publish Documentation)📋
 트러블 슈팅 🎈
 ---
 <details>
-<summary>4조가 트러블 슈팅 or 성능개선을 하는 방식</summary>
+<summary>이미지 업로드 성능 개선</summary><br>
 
-1. 안건제시
+<br>
 
-2. 문제분석
+### 이미지 업로드 방법을 **Pre-signed URL 방식으로 변경(성능 개선율 : 165%)**
 
-3. 개선계획수립
+---
 
-4. 코드 수정
+### **기존 업로드 방식(클라이언트 → 서버 → AWS S3 Bucket)**
 
-5. PR을 통해 검토
+ **:** `클라이언트`에서 서버로 파일을 전달하고 `서버`에서 `AWS S3 Bucket`에 업로드
 
-6. 반영
-   - 실제 예시 링크([23.02.22 보드,코멘트 관련 비상회의록](https://www.notion.so/23-02-22-6ddb6bb392c841828c161472d9e86fb0))
-</details>
-<details>
-<summary>CI - sub module & profile & embedded redis 기반의 배포, 테스트 환경 분리</summary><br>
-</details>
-<details>
-<summary>Pre-signed URL 방식을 택한 이유</summary><br>
+![1](https://user-images.githubusercontent.com/116135174/232500121-be4db4f0-d79d-49d3-9064-37978b63f4d4.png)
 
-클라이언트에서 S3에 파일을 업로드 하는 방법은 크게 3가지 존재
+**기존 방식의 단점**
 
->**1. AWS SDK를 이용해 직접 업로드**
->
->**2. API 서버에 파일을 전달하고 API 서버에서 S3에 업로드(기존 적용 방법)**
->
->**3. PreSignedURL을 이용한 클라이언트 -> S3 업로드(트러블 슈팅 후 적용 방법)**
->
+- 파일 업로드 시,  `클라이언트`-> `서버`-> `AWS S3 Bucket` 의 파일 전달 흐름을 가짐
+- 저장하지도 않을 파일들이 서버를 통해가면서 불필요한 서버 리소스 낭비가 발생
+- 또한 과도한 업로드 작업이 생기면 서버에 과부하가 걸리게 되고 서버를 거쳐 가는 지연시간이 생기게 됨
 
-![images_kyy00n_post_a50e0237-a9eb-4ab2-8be9-ae0d2a2ea5cf_image](https://user-images.githubusercontent.com/116135174/224603164-93553af3-e4ed-40be-8608-9cd43ee8b056.png)
+→ 위 방법들의 단점을 보완하기 위해 Pre-signed URL 기능을 사용하여 성능을 개선
+
+---
+
+### 개선 후 **Presigned Url 방식(클라이언트 → AWS S3 Bucket)**
+
+![2](https://user-images.githubusercontent.com/116135174/232500147-370d5f60-ef45-498b-9b58-885d9bb5b205.png)
 
 
-📌 **1, 2번 방식의 단점**<br>
+- **PreSignedURL을 이용한 `클라이언트` -> `AWS S3 Bucket` 업로드**
 
-- 1번 방법
-   - 서버를 거치지 않지만, AWS SDK를 써서 S3이용이 가능해야 하기 때문에 클라이언트에서 AWS SDK를 사용하는 시점에는<br> 
-결국  AWS Access Key와 Secret Key 정보를 알고 있어야 함
+- **업로드 순서**
+    
+    1.클라이언트가 서버한테 이미지 업로드 요청(클라이언트 → 서버)
+    
+    2.서버는 AWS에게 PutObject 방식의 Presigned url 발급 요청 (서버 → AWS S3)
+    
+    3.AWS에서 서버로 Presigned Url 발급(AWS S3 → 서버)
+    
+    4.서버에서 클라이언트로 Presigned Url 전달(서버 → 클라이언트)
+    
+    5.클라이언트가 Presigned Url 통해서 이미지 파일 업로드 (클라이언트 → AWS S3)
+    
 
-   ->Key 정보 노출 위험성 존재<br>
+**효과**
 
-- 2번 방법 (기존 프로젝트 진행 방식)
-   - API서버에서 파일을 업로드하기 때문에 AWS Access Key와 Secret Key 정보를 서버가 가지고 있어 Key 정보가 노출되는 위험 없음<br> 
-   - 하지만 파일 업로드 시, 파일 전달 흐름이 클라이언트 -> 서버 -> S3 순으로 되게 되는데<br> 
-   - 이는 저장하지도 않을 파일들이 서버를 통해가면서 불필요한 서버의 리소스를 사용하게 됨<br>
-   - 또한 과도한 업로드 작업이 생기면 서버에 과부하가 걸리게 되고 서버를 거쳐가는 지연시간이 생기게 됨<br>
+- 서버의 역할이 파일 업로드를 처리하는 것에서 문자열을 주고받는 식으로 바뀌었기 때문에 프로세스가 훨씬 가벼워짐
+
+---
+
+### 실행 시간 차이
+
+<aside>
+💡 
+
+**성능개선율 : 165%**
+
+ : **(361 - 136) / 136 = 1.654**
+
+* 개선 전 : 361ms
+* 개선 후 : 136ms
+
+</aside>
+
+---
+
+### **기존 이미지 업로드 방식(개선 전)**
+
+![3](https://user-images.githubusercontent.com/116135174/232500187-a37f5c6d-9a09-4c98-bb7c-b4192b154d77.png)
+
+![4](https://user-images.githubusercontent.com/116135174/232500215-74489f88-c194-4bc9-9bc0-c293e11602ab.png)
 
 
-**위 방법들의 `단점을 보완`하기 위해 `Pre-signed URL 기능`을 사용하여 성능을 개선**
 
-![presigned url](https://user-images.githubusercontent.com/116135174/224603186-fc380104-5cf3-4b43-9541-df2b09a2770a.png)
+이미지 업로드 포함 글 작성 시간 -> 381 ms
 
-📋 하나의 파일을 S3에 업로드하기 위한 Pre-signed URL 과정은 다음과 같음
+이미지 업로드 포함하지 않은  글 작성 시간 -> 20 ms
 
->1.  클라이언트에서 서버에 pre-signed URL를 받기 위한 API 호출 (POST 요청)<br>
->2. 서버에서 AWS S3에 pre-signed URL요청 3. AWS에서 pre-signed URL을 서버에 반환<br>
->4. 서버는 반환받은 pre-signed URL를 클라이언트에 전달<br>
->5. 클라이언트에서 AWS pre-signed URL로 이미지 upload (S3에 직접 업로드) (PUT 요청)<br>
->6. 서버에게 해당 요청이 종료 되었음을 알림<br>
+**→ 기존 방식의 이미지 업로드 실행 시간 = 361 ms**
 
-**서버의 역할이 파일 업로드를 처리하는 것에서 문자열을 주고받는 식으로 바뀌었기 때문에<br> 
-프로세스가 훨씬 가벼워지고 브라우저에서 Key를 직접 만지지도 않아 보안성이 우수해짐** <br>
+---
+
+### PreSigned Url 이미지 업로드 방식(개선 후)
+
+![5](https://user-images.githubusercontent.com/116135174/232500246-ccf131d0-6579-4b0d-be6a-e75734d978ae.png)
+
+![6](https://user-images.githubusercontent.com/116135174/232500260-9722f9a8-7a7a-4a8f-8ccf-eb12640f4d4b.png)
+
+
+
+Put PreSigned Url 요청 -> 18 ms
+
+요청 받은 Url로 이미지 업로드 -> 118 ms
+
+**→ PreSignued Url 방식의 이미지 업로드 실행 시간 = 136 ms**
+
 </details>
 <details>
 <summary>QueryDSL</summary><br>
 
-📌 **QueryDSL을 적용한 이유 (개선 전)**
 <br>
->![기존검색방식](https://user-images.githubusercontent.com/116135174/224602932-fa25e3c5-067f-4135-aeee-fa01f4264fab.png)
 
+### QueryDSL을 활용한 검색 및 조회 기능으로 성능 개선(성능 개선율 : 160%)
 
->위와 같이 `Spring Data Jpa`를 이용해서 조회 기능을 구현 하기에는 검색 조건 등 여러 부분에서 작동이 효율적으로 되지 않았고,
->
->여러 조건의 검색 방식을 구현하기 위해서는 비슷한 메소드들을 추가로 작성 해줘야 해서 
->
->**비효율적**이었음<br>
+---
+<br>
 
-📌**QueryDSL을 적용한 이유 (개선 후)**
+### **기존 방식(Spring Data JPA 메소드 활용)**
 
->![수정방식](https://user-images.githubusercontent.com/116135174/224602950-0c88be12-a095-46d2-b477-00a294116478.png)
->![화면_캡처_2023-03-10_191553](https://user-images.githubusercontent.com/116135174/224602959-1c019c2f-e8da-4412-b294-6fec64ba0b6f.png)
+![기존검색방식](https://user-images.githubusercontent.com/116135174/232498456-7b886b43-fd03-4cd9-92ab-4fa9d184d5ae.png)
 
-하지만 `QueryDSL`을 활용, `동적 쿼리`를 작성해서 편하게 구현이 가능해짐
+- `Spring Data Jpa`를 이용해서 여러 조건의 검색 방식을 구현하기 위해서는 위와 비슷한 메소드들을 **여러 개 작성** 해줘야 하며, 그 방식도 제한적이고 쿼리 성능도 비효율적
 
->### 동적 쿼리란 ?
->
->동적 쿼리란 **상황에 따라 다른 문법의 SQL을 적용**하는 것을 의미
->
->예를 들면 DB에서 값을 조회할 때 조회 조건이 위와 같이 동적으로 바뀌어야 하는 경우가 많음<br> 
->이런 상황을 Querydsl을 사용해서 손쉽게 해결
+### 개선 후 **QueryDSL 활용 방식**
 
->`Querydsl`은 아래 2가지 기능을 제공
->
->- `where()`에 `null`이 들어오면 무시
->- `where()`에 **`,**` 을 `and` 조건으로 사용
+![quer3](https://user-images.githubusercontent.com/116135174/232498573-366263df-1044-4daa-9970-461c8a18585c.png)
+![수정방식](https://user-images.githubusercontent.com/116135174/232498617-40c31e00-a940-47e8-9ab7-43ef992e9df0.png)
 
-🔓 `BooleanExpression`**을 사용해서 `삼항 연산자`를 통해 위 기능을 활용 했고, 한개의 메소드로 여러 **검색 조건**을 활용할 수 있게 하였음
-</details>
-</details>
+<br>
 
-ERD 🕸️
+- QueryDSL을 활용, 동적 쿼리를 작성해서 한 개 메소드로 여러 검색 및 정렬 조건을 구현
+    - where()에 BooleanExpression을 사용해서 한 개의 메소드로 여러 검색 조건을 활용
+    - OrderSpecifier를 이용하여 동적 쿼리로 여러 정렬 기능을 활용
+- Projection을 사용해서 **Entity 전체를 가져오는 것이 아니라 Select 절에서 원하는 컬럼만 조회하도록 지정함**
+
+<br>
+
+**📌 JPQL 이 아닌 QueryDSL을 사용한 이유 :** 
+
+ 동적 쿼리 작성이 용이하며,  JPQL은 문법 오류를 컴파일 시점에서 잡아주지 않는다는 치명적 단점이 존재함
+
 ---
 
+### **실행 시간 차이**
+
+<aside>
+💡 
+
+**성능개선율 : 160%**
+
+ : **(26 - 10) / 10 = 1.6**
+
+* 개선 전 : 26ms
+* 개선 후 : 10ms
+
+</aside>
+
+---
+
+### 기존 JPA Repository 메소드 활용한 조회 방식
+
+![image](https://user-images.githubusercontent.com/116135174/232498740-eb9d7851-c700-4508-aa90-2db0e1fc5ea2.png)
+
+**실행 시간 : 26ms**
+
+
+### QueryDsl 활용한 조회 방식
+
+![imagef](https://user-images.githubusercontent.com/116135174/232498773-802817c6-0ed4-457a-91fe-e3bae7b9aa15.png)
+
+
+**실행 시간 : 10ms**
+
+</details>
+<details>
+<summary>Redis를 활용한 Cache</summary><br>
+<br>
+
+### Redis를 활용한 Cache기능으로 전체 유저 조회 기능 성능 개선(성능 개선율 : 200%) ###
+
+---
+
+<br>
+
+![redisCache](https://user-images.githubusercontent.com/116135174/232497433-f78e73e0-1436-4ca9-921e-04ae872f9cb0.png)
+
+### Redis Cache 사용
+
+- 사용자가 늘어남에 따라 DB에 부하가 가해지기 시작한다.
+- 이 부하를 줄이기 위해 한 번 읽어온 데이터를 저장하고 
+다시 요청하는 경우 빠르게 결과 값을 받을 수 있도록 함 (캐싱)
+- 가장 먼저 캐시에 데이터가 있는지 확인 → 데이터가 있으면 캐시 데이터 사용
+- 데이터가 없으면 실제 DB데이터 사용 → DB데이터를 캐시에 저장
+
+---
+
+### **실행 시간 차이**
+
+<aside>
+💡 
+
+**성능개선율 : 200%**
+
+ : **(32 - 16) / 16 = 2**
+
+* 개선 전 : 32ms
+* 개선 후 : 16ms
+
+</aside>
+
+---
+### 기존 조회 방식
+
+![캐시전32ms](https://user-images.githubusercontent.com/116135174/232497569-6858bd78-1eb3-44b2-8872-44476b0b3e7f.png)
+
+* 실행시간 : 32ms
+
+### Cache 적용 후 조회 방식
+
+![캐시후16ms](https://user-images.githubusercontent.com/116135174/232497588-321e5dd5-a03b-42ac-8a01-6fc7cfc3efe7.png)
+
+* 실행시간 : 16ms
+</details>
+<details>
+<summary>Redis를 활용한 RTR(Refresh Token Rotation) 및 AccessToken BlackList 기능</summary><br>
+
+<br>
+
+### Redis를 활용하여 Refresh**Token 저장, RTR(RefreshTokenRotation) 방식 사용 및 로그아웃 시 AccessToken을 BlackList로 저장**
+
+---
+
+
+### **기존 JWT(JSON Web Token)의 문제점**
+
+- 한번 만들어진 토큰을 제어할 수 없고, 이를 위해 만료 시간을 짧게 하면 잦은 로그인이 필요해짐
+- 토큰을 지울 수 없으므 로그아웃에 문제가 있다.
+
+### **보완책**
+
+- **Refresh Token 기능 추가**
+    - Refresh Token을 도입하여 Access Token의 만료 시간을 짧게 해도 잦은 로그인 문제가 발생하지 않도록 함 (AccessToken 30분, RefreshToken 2주일로 설정)
+    
+![1](https://user-images.githubusercontent.com/116135174/232501172-24995d65-c508-4f93-a056-0c16d59d528e.png)
+
+    
+
+- **Refresh Token이 탈취당할 경우를 대비한 RTR(Refresh Token Rotation) 기능 추가**
+    - 로그인과 리이슈 할 때마다 유효한 Refresh Token 생성, Redis에 저장 및 비교 과정 거침
+
+![2](https://user-images.githubusercontent.com/116135174/232501190-bdfdc723-37fd-4bcd-b8b8-133e53c77c56.png)
+
+
+- **Access Token을 Black List로 저장하면서 로그아웃 기능 구현**
+    - 로그아웃 시, Redis에서 RefreshToken을 삭제하고, AccessToken을 Black List로 저장하여 Filter 단계에서 거름
+
+![3](https://user-images.githubusercontent.com/116135174/232501219-a604029f-fb76-483e-88df-589924011fcc.png)
+
+
+![4](https://user-images.githubusercontent.com/116135174/232501293-44790174-a0a3-4f58-b416-25a280cb391a.png)
+
+
+</details>
