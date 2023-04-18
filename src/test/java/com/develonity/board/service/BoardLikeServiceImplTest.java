@@ -82,4 +82,40 @@ class BoardLikeServiceImplTest {
             findUser.get().getId()));
 
   }
+
+
+  @Test
+  @DisplayName("게시글 좋아요 갯수 카운트")
+  void countLikes() throws IOException {
+    Optional<User> findUser = userRepository.findById(1L);
+    CommunityBoardRequest request = new CommunityBoardRequest("제목2", "내용2",
+        CommunityCategory.NORMAL);
+    List<MultipartFile> multipartFiles = new ArrayList<>();
+    CommunityBoard createCommunityBoard = communityBoardService.createCommunityBoard(request,
+        multipartFiles, findUser.get());
+
+
+    assertThat(boardLikeRepository.countByBoardId(createCommunityBoard.getId())).isEqualTo(0);
+
+    boardLikeService.addBoardLike(findUser.get().getId(), createCommunityBoard.getId());
+    assertThat(boardLikeRepository.countByBoardId(createCommunityBoard.getId())).isEqualTo(1);
+
+    boardLikeService.cancelBoardLike(findUser.get().getId(), createCommunityBoard.getId());
+    assertThat(boardLikeRepository.countByBoardId(createCommunityBoard.getId())).isEqualTo(0);
+  }
+
+  @Test
+  @DisplayName("게시글,유저 일치하는 좋아요 존재하는지 여부")
+  void existsLikesBoardIdAndUserId() throws IOException {
+    Optional<User> findUser = userRepository.findById(1L);
+    CommunityBoardRequest request = new CommunityBoardRequest("제목2", "내용2",
+        CommunityCategory.NORMAL);
+    List<MultipartFile> multipartFiles = new ArrayList<>();
+    CommunityBoard createCommunityBoard = communityBoardService.createCommunityBoard(request,
+        multipartFiles, findUser.get());
+
+    assertThat(boardLikeRepository.existsBoardLikeByBoardIdAndUserId(createCommunityBoard.getId(), findUser.get().getId())).isEqualTo(false);
+    boardLikeService.addBoardLike(findUser.get().getId(), createCommunityBoard.getId());
+    assertThat(boardLikeRepository.existsBoardLikeByBoardIdAndUserId(createCommunityBoard.getId(), findUser.get().getId())).isEqualTo(true);
+  }
 }

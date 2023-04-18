@@ -6,8 +6,6 @@ public interface BoardLikeService {
 
   void deleteLike(Long boardId);
 
-  boolean existLikes(Long boardId);
-
   void addBoardLike(Long userId, Long boardId);
 
   void cancelBoardLike(Long userId, Long boardId);

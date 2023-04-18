@@ -47,11 +47,6 @@ public class BoardLikeServiceImpl implements BoardLikeService {
   }
 
   @Override
-  public boolean existLikes(Long boardId) {
-    return boardLikeRepository.existsBoardLikeById(boardId);
-  }
-
-  @Override
   public boolean existsLikesBoardIdAndUserId(Long boardId, Long userId) {
     return boardLikeRepository.existsBoardLikeByBoardIdAndUserId(boardId, userId);
   }
